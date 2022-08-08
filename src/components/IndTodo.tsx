@@ -18,8 +18,8 @@ export default function IndTodo({todo, state, setState}: Prop): JSX.Element {
     }
     
     async function handleDeleteClick(): Promise<void> {
-        const response: unknown = await axios.delete(`http://localhost:4000/todos/${todo.id}`);
-        const newData: Todo[] = await axios.get("http://localhost:4000");
+        const response: unknown = await (await axios.delete(`http://localhost:4000/todos/${todo.id}`)).data;
+        const newData: Todo[] = await (await axios.get("http://localhost:4000")).data;
         const newState = {...state};
         newState.todos = newData;
         setState(newState);

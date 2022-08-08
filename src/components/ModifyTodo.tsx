@@ -22,7 +22,7 @@ export default function ModifyTodo({state, setState}: Prop): JSX.Element {
         console.log(check);
         const newState = {...state};
         const getNewTodos = async (): Promise<void> => {
-            const response: Todo[] = await axios.get(url);
+            const response: Todo[] = await (await axios.get(url)).data;
             const newState = {...state};
             newState.onHomepage = true;
             newState.todos = response;
