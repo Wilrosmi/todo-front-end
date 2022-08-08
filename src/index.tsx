@@ -4,6 +4,9 @@ import App from "./App";
 
 ReactDOM.render(
   <React.StrictMode>
+    <head>
+      <title>Todo's</title>
+    </head>
     <App />
   </React.StrictMode>,
   document.getElementById("root")

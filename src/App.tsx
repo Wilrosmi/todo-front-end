@@ -1,7 +1,42 @@
 import { greet } from "./utils/greet";
+import { useState, useEffect } from "react";
+import { Todo } from "./utils/types";
+import axios from "axios";
+import Homepage from "./components/Homepage";
+import ModifyTodo from "./components/ModifyTodo";
+
+export interface State {
+  todos: Todo[],
+  onHomepage: boolean,
+  idRelevantTodo: number
+}
 
 function App(): JSX.Element {
-  return <h1>{greet("World")}</h1>;
+  
+  const [state, setState] = useState<State>({
+    todos: [],
+    onHomepage: true,
+    idRelevantTodo: -1
+  })
+
+  const {todos, onHomepage, idRelevantTodo} = state;
+
+  useEffect(() => {
+    const getTodos = async () => {
+      const response: Todo[] = await axios.get("http://localhost:4000/todos");
+      const newState = {...state};
+      newState.todos = response;
+      setState(newState);
+    }
+    getTodos();
+  }, []);
+  
+  
+  return (
+    <body>
+      {onHomepage ? <Homepage todos={todos} setState={setState} state={state} /> : <ModifyTodo state={state} setState={setState} />}
+    </body>
+  )
 }
 
 export default App;
