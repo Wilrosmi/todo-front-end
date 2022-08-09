@@ -18,12 +18,13 @@ function App(): JSX.Element {
     idRelevantTodo: -1
   })
 
+  console.log(state.todos);
+
   const {todos, onHomepage} = state;
 
   useEffect(() => {
     const getTodos = async () => {
       const response: Todo[] = (await axios.get("http://localhost:4000/todos")).data;
-      console.log(response);
       const newState = {...state};
       newState.todos = response;
       setState(newState);
