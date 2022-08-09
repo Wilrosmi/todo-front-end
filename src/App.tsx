@@ -25,9 +25,11 @@ function App(): JSX.Element {
     const getTodos = async () => {
       const response: Todo[] = (await axios.get("http://localhost:4000/todos"))
         .data;
-      const newState = { ...state };
-      newState.todos = response;
-      setState(newState);
+      setState(state => {
+        const newState = {...state};
+        newState.todos = response;
+        return newState;
+      });
     };
     getTodos();
   }, []);
