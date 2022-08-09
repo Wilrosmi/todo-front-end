@@ -1,4 +1,3 @@
-import { greet } from "./utils/greet";
 import { useState, useEffect } from "react";
 import { Todo } from "./utils/types";
 import axios from "axios";
@@ -19,7 +18,7 @@ function App(): JSX.Element {
     idRelevantTodo: -1
   })
 
-  const {todos, onHomepage, idRelevantTodo} = state;
+  const {todos, onHomepage} = state;
 
   useEffect(() => {
     const getTodos = async () => {
@@ -34,9 +33,9 @@ function App(): JSX.Element {
   
   
   return (
-    <body>
+    <div>
       {onHomepage ? <Homepage todos={todos} setState={setState} state={state} /> : <ModifyTodo state={state} setState={setState} />}
-    </body>
+    </div>
   )
 }
 

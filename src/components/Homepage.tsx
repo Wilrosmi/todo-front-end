@@ -19,7 +19,7 @@ export default function Homepage({todos, setState, state}: Prop): JSX.Element {
 
     return (
         <div>
-            <h1>Will's Todo App</h1>;
+            <h1>Will's Todo App</h1>
             {todos.map(todo => <IndTodo todo={todo} key={todo.id} state={state} setState={setState} />)}
             <button onClick={handleCreateClick}>Create a Todo</button>
         </div>

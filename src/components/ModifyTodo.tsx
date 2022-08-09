@@ -20,7 +20,6 @@ export default function ModifyTodo({state, setState}: Prop): JSX.Element {
         const url = "http://localhost:4000/todos"
         const check = state.idRelevantTodo === -1 ? axios.post(url, {title: inputTitle, body: inputBody}) : axios.put(`${url}/${state.idRelevantTodo}`, {title: inputTitle, body: inputBody});
         console.log(check);
-        const newState = {...state};
         const getNewTodos = async (): Promise<void> => {
             const response: Todo[] = await (await axios.get(url)).data;
             const newState = {...state};
