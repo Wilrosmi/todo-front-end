@@ -22,7 +22,7 @@ function App(): JSX.Element {
 
   useEffect(() => {
     const getTodos = async () => {
-      const response: Todo[] = await (await axios.get("http://localhost:4000/todos")).data;
+      const response: Todo[] = (await axios.get("http://localhost:4000/todos")).data;
       console.log(response);
       const newState = {...state};
       newState.todos = response;
