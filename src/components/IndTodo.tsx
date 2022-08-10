@@ -10,21 +10,26 @@ interface Prop {
 }
 
 export default function IndTodo({ todo, state, setState }: Prop): JSX.Element {
+  // Will take user to individual todo page, and the page will know which todo is being edited based on idRelevantTodo
   function handleEditClick(): void {
-    const newState = { ...state };
-    newState.onHomepage = false;
-    newState.idRelevantTodo = todo.id;
-    setState(newState);
+    setState((state) => {
+      const newState = { ...state };
+      newState.onHomepage = false;
+      newState.idRelevantTodo = todo.id;
+      return newState;
+    });
   }
 
+  // Sends a request to server to delete the todos whose delete button was clicked, then requests the new list of todos
+  // to update state
   async function handleDeleteClick(): Promise<void> {
-    console.log(todo.id);
     await axios.delete(`${url}/${todo.id}`);
-    const newData: Todo[] = (await axios.get("url"))
-      .data;
-    const newState = { ...state };
-    newState.todos = newData;
-    setState(newState);
+    const newData: Todo[] = await (await axios.get("url")).data;
+    setState((state) => {
+      const newState = { ...state };
+      newState.todos = newData;
+      return newState;
+    });
   }
 
   return (

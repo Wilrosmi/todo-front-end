@@ -13,13 +13,18 @@ export default function Homepage({
   setState,
   state,
 }: Prop): JSX.Element {
+  // Sets state such that user will be taken off the homepage on next render, and will be taken to the generic todo view
+  // as the id is -1.
   function handleCreateClick(): void {
-    const newState = { ...state };
-    newState.onHomepage = false;
-    newState.idRelevantTodo = -1;
-    setState(newState);
+    setState((state) => {
+      const newState = { ...state };
+      newState.onHomepage = false;
+      newState.idRelevantTodo = -1;
+      return newState;
+    });
   }
 
+  // Renders every individual todo in the correct form using map. Also renders the create todo button.
   return (
     <div>
       <h1>Will's Todo App</h1>
