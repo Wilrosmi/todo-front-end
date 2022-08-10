@@ -1,6 +1,7 @@
 import { Todo } from "../utils/types";
 import { State } from "../App";
 import axios from "axios";
+import url from "../utils/url";
 
 interface Prop {
   todo: Todo;
@@ -18,8 +19,8 @@ export default function IndTodo({ todo, state, setState }: Prop): JSX.Element {
 
   async function handleDeleteClick(): Promise<void> {
     console.log(todo.id);
-    await axios.delete(`http://localhost:4000/todos/${todo.id}`);
-    const newData: Todo[] = (await axios.get("http://localhost:4000/todos"))
+    await axios.delete(`${url}/${todo.id}`);
+    const newData: Todo[] = (await axios.get("url"))
       .data;
     const newState = { ...state };
     newState.todos = newData;

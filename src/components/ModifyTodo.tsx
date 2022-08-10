@@ -3,6 +3,7 @@ import getTodoById from "../utils/getTodoById";
 import { useState } from "react";
 import axios from "axios";
 import { Todo } from "../utils/types";
+import url from "../utils/url"
 
 interface Prop {
   state: State;
@@ -17,7 +18,6 @@ export default function ModifyTodo({ state, setState }: Prop): JSX.Element {
   const [inputBody, setInputBody] = useState(bodyValue);
 
   function handleSubmit(): void {
-    const url = "http://localhost:4000/todos";
     const getNewTodos = async (): Promise<void> => {
       state.idRelevantTodo === -1
         ? await axios.post(url, { title: inputTitle, body: inputBody })

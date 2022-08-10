@@ -3,6 +3,7 @@ import { Todo } from "./utils/types";
 import axios from "axios";
 import Homepage from "./components/Homepage";
 import ModifyTodo from "./components/ModifyTodo";
+import url from "./utils/url"
 
 export interface State {
   todos: Todo[];
@@ -23,7 +24,7 @@ function App(): JSX.Element {
 
   useEffect(() => {
     const getTodos = async () => {
-      const response: Todo[] = (await axios.get("http://localhost:4000/todos"))
+      const response: Todo[] = (await axios.get(url))
         .data;
       setState(state => {
         const newState = {...state};
