@@ -22,14 +22,17 @@ export default function IndTodo({ todo, state, setState }: Prop): JSX.Element {
 
   // Sends a request to server to delete the todos whose delete button was clicked, then requests the new list of todos
   // to update state
-  async function handleDeleteClick(): Promise<void> {
-    await axios.delete(`${url}/${todo.id}`);
-    const newData: Todo[] = await (await axios.get("url")).data;
-    setState((state) => {
-      const newState = { ...state };
-      newState.todos = newData;
-      return newState;
-    });
+  function handleDeleteClick(): void {
+    async function deleteAndUpdate(): Promise<void> {
+      await axios.delete(`${url}/${todo.id}`);
+      const newData: Todo[] = await (await axios.get(url)).data;
+      setState((state) => {
+        const newState = { ...state };
+        newState.todos = newData;
+        return newState;
+      });
+    }
+    deleteAndUpdate();
   }
 
   return (
